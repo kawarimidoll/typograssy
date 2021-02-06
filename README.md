@@ -1,2 +1,3 @@
-# typograssy
-Typography meets GitHub-grass
+# Typograssy
+
+[WIP] Typography like GitHub-grass
