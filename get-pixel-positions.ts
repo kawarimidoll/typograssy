@@ -4,8 +4,8 @@ const getCharacterArray = (char: string): number[][] =>
     .split("/")
     .map((p) => p.split("").map((n) => Number(n)));
 
-export default (message: string): number[][] =>
-  message
+export default (text: string): number[][] =>
+  text
     .split("")
     .reduce(
       (acc, crnt) => acc.concat(getCharacterArray(crnt)),

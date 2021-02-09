@@ -35,19 +35,17 @@ const colorRects = colors.map((color, idx) => rect(idx, 0, color)).join("");
 const legendPos = { x: width - rectStep * 7, y: height - rectSize * 2 };
 
 export class Svg {
-  private messageRects: string;
+  private textRects: string;
   constructor(
-    private message: string,
+    private text: string,
   ) {
-    console.log(this.message);
-
-    const pixelPositons = getPixelPositions(message);
+    const pixelPositons = getPixelPositions(this.text);
 
     const steps = pixelPositons.length;
     const offset = Math.ceil((weeks.length - steps) / 2);
     const getRandomColor = () =>
       colors[Math.floor(Math.random() * (colors.length - 1)) + 1];
-    this.messageRects = pixelPositons.map((line, x) =>
+    this.textRects = pixelPositons.map((line, x) =>
       days.map((day) => {
         if (line.includes(day)) {
           const color = getRandomColor();
@@ -67,7 +65,7 @@ export class Svg {
         "g",
         { transform: `translate(${rectStep}, ${rectStep})` },
         baseRects,
-        this.messageRects,
+        this.textRects,
       ),
       h(
         "g",
