@@ -1,6 +1,8 @@
 import getPixelPositions from "./get-pixel-positions.ts";
 import h from "./tag.ts";
 
+const svgID = "typograssy";
+
 const weeks = 53;
 const days = 7;
 const rectSize = 10;
@@ -8,7 +10,7 @@ const rectSpan = 3;
 const rectRadius = 2;
 const rectStep = rectSize + rectSpan;
 
-const rectStyle = `#typograssy .pixel {
+const rectStyle = `#${svgID} .pixel {
   width: ${rectSize}px;
   height: ${rectSize}px;
   rx: ${rectRadius}px;
@@ -53,7 +55,7 @@ export class Svg {
     const translateX = steps * rectStep;
     const ms = this.speed * steps;
     const scrollStyle = needScroll
-      ? `#typograssy #text-pixels { animation: step ${ms}ms steps(${steps}) infinite; }
+      ? `#${svgID} #text-pixels { animation: step ${ms}ms steps(${steps}) infinite; }
           @keyframes step { to { transform:  translateX(-${translateX}px); } }`
       : "";
 
@@ -63,7 +65,7 @@ export class Svg {
       scrollStyle,
       rectStyle,
       ...this.colors.map((color, idx) =>
-        `#typograssy .l${idx} { fill: ${color}; }`
+        `#${svgID} .l${idx} { fill: ${color}; }`
       ),
     );
 
@@ -89,7 +91,7 @@ export class Svg {
   render(): string {
     return h(
       "svg",
-      { width, height, xmlns: "http://www.w3.org/2000/svg", id: "typograssy" },
+      { width, height, xmlns: "http://www.w3.org/2000/svg", id: svgID },
       this.style,
       h("rect", { width, height, stroke: this.frame, fill: this.bg }),
       h(
