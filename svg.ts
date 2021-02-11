@@ -37,6 +37,7 @@ export class Svg {
   private textRects: string;
   private baseRects: string;
   private scrollStyle: string;
+
   constructor(
     private text: string,
     private colors: string[],
@@ -49,24 +50,25 @@ export class Svg {
     const steps = pixelPositons.length;
     const needScroll = steps > weeks;
     const translateX = steps * rectStep;
+    const ms = this.speed * steps;
     this.scrollStyle = needScroll
       ? h(
         "style",
         {},
-        `.pixel { animation: step ${this.speed *
-          steps}ms steps(${steps}) infinite; }
-          @keyframes step { to { transform:  translateX(-${translateX}px); } }`,
+        `#typograssy-pixels { animation: step ${ms}ms steps(${steps}) infinite; }`,
+        `@keyframes step { to { transform:  translateX(-${translateX}px); } }`,
       )
       : "";
+
     const offset = needScroll ? 1 : Math.ceil((weeks - steps) / 2);
     const getRandomColor = () =>
       this.colors[Math.floor(Math.random() * (this.colors.length - 1)) + 1];
     this.textRects = pixelPositons.map((line, x) =>
       line.map((y) => {
         const color = getRandomColor();
-        const ret = rect(x + offset, y, color, { class: "pixel" });
+        const ret = rect(x + offset, y, color);
         if (needScroll && x < weeks - offset) {
-          return ret + rect(x + offset + steps, y, color, { class: "pixel" });
+          return ret + rect(x + offset + steps, y, color);
         }
         return ret;
       }).join("")
@@ -81,21 +83,18 @@ export class Svg {
     return h(
       "svg",
       { width, height, xmlns: "http://www.w3.org/2000/svg" },
+      this.scrollStyle,
       h("rect", { width, height, stroke: this.frame, fill: this.bg }),
       h(
-        "g",
-        { transform: `translate(${rectStep}, ${rectStep})` },
-        h(
-          "g",
-          {},
-          this.baseRects,
-        ),
-        h(
-          "svg",
-          { width: width - rectStep * 2, height: height - rectStep * 2 },
-          this.scrollStyle,
-          this.textRects,
-        ),
+        "svg",
+        {
+          x: rectStep,
+          y: rectStep,
+          width: width - rectStep * 2,
+          height: height - rectStep * 2,
+        },
+        h("g", {}, this.baseRects),
+        h("g", { id: "typograssy-pixels" }, this.textRects),
       ),
       h(
         "g",
@@ -105,7 +104,7 @@ export class Svg {
       h(
         "g",
         { transform: `translate(${legendPos.x}, ${legendPos.y})` },
-        ...this.colors.map((color, idx) => rect(idx, 0, color)),
+        this.colors.map((color, idx) => rect(idx, 0, color)).join(""),
       ),
     );
   }
