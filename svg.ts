@@ -44,6 +44,7 @@ export class Svg {
     private bg: string,
     private frame: string,
     private speed: number,
+    private comment: string,
   ) {
     const pixelPositons = getPixelPositions(this.text);
 
@@ -99,7 +100,7 @@ export class Svg {
       h(
         "g",
         { transform: `translate(${rectStep}, ${height - rectSize})` },
-        h("text", { "font-size": rectStep }, "kawarimidoll/typograssy"),
+        h("text", { "font-size": rectStep }, this.comment),
       ),
       h(
         "g",
