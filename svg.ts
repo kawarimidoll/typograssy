@@ -7,25 +7,25 @@ const rectSize = 10;
 const rectSpan = 3;
 const rectRadius = 2;
 const rectStep = rectSize + rectSpan;
-const rectStroke = "rgba(27,31,35,0.06)";
-const rectStrokeWidth = 2;
+
+const rectStyle = `#typograssy .pixel {
+  width: ${rectSize}px;
+  height: ${rectSize}px;
+  rx: ${rectRadius}px;
+  ry: ${rectRadius}px;
+  stroke: rgba(27,31,35,0.06);
+  stroke-width: 2px;
+}`;
+
 const rect = (
   x: number,
   y: number,
-  fill: string,
-  attrs?: { [key: string]: string },
+  level: number,
 ): string =>
   h("rect", {
+    class: `pixel l${level}`,
     x: x * rectStep,
     y: y * rectStep,
-    fill,
-    width: rectSize,
-    height: rectSize,
-    rx: rectRadius,
-    ry: rectRadius,
-    stroke: rectStroke,
-    "stroke-width": rectStrokeWidth,
-    ...attrs,
   });
 
 const width = rectStep * (weeks + 2) - rectSpan;
@@ -36,7 +36,7 @@ const legendPos = { x: width - rectStep * 7, y: height - rectSize * 2 };
 export class Svg {
   private textRects: string;
   private baseRects: string;
-  private scrollStyle: string;
+  private style: string;
 
   constructor(
     private text: string,
@@ -52,18 +52,24 @@ export class Svg {
     const needScroll = steps > weeks;
     const translateX = steps * rectStep;
     const ms = this.speed * steps;
-    this.scrollStyle = needScroll
-      ? h(
-        "style",
-        {},
-        `#typograssy-pixels { animation: step ${ms}ms steps(${steps}) infinite; }`,
-        `@keyframes step { to { transform:  translateX(-${translateX}px); } }`,
-      )
+    const scrollStyle = needScroll
+      ? `#typograssy #text-pixels { animation: step ${ms}ms steps(${steps}) infinite; }
+          @keyframes step { to { transform:  translateX(-${translateX}px); } }`
       : "";
+
+    this.style = h(
+      "style",
+      {},
+      scrollStyle,
+      rectStyle,
+      ...this.colors.map((color, idx) =>
+        `#typograssy .l${idx} { fill: ${color}; }`
+      ),
+    );
 
     const offset = needScroll ? 1 : Math.ceil((weeks - steps) / 2);
     const getRandomColor = () =>
-      this.colors[Math.floor(Math.random() * (this.colors.length - 1)) + 1];
+      Math.floor(Math.random() * (this.colors.length - 1)) + 1;
     this.textRects = pixelPositons.map((line, x) =>
       line.map((y) => {
         const color = getRandomColor();
@@ -76,15 +82,15 @@ export class Svg {
     ).join("");
 
     this.baseRects = new Array(weeks * days).fill(0).map((_, i) =>
-      rect(Math.floor(i / days), i % days, this.colors[0])
+      rect(Math.floor(i / days), i % days, 0)
     ).join("");
   }
 
   render(): string {
     return h(
       "svg",
-      { width, height, xmlns: "http://www.w3.org/2000/svg" },
-      this.scrollStyle,
+      { width, height, xmlns: "http://www.w3.org/2000/svg", id: "typograssy" },
+      this.style,
       h("rect", { width, height, stroke: this.frame, fill: this.bg }),
       h(
         "svg",
@@ -95,7 +101,7 @@ export class Svg {
           height: height - rectStep * 2,
         },
         h("g", {}, this.baseRects),
-        h("g", { id: "typograssy-pixels" }, this.textRects),
+        h("g", { id: "text-pixels" }, this.textRects),
       ),
       h(
         "g",
@@ -105,7 +111,7 @@ export class Svg {
       h(
         "g",
         { transform: `translate(${legendPos.x}, ${legendPos.y})` },
-        this.colors.map((color, idx) => rect(idx, 0, color)).join(""),
+        this.colors.map((_, idx) => rect(idx, 0, idx)).join(""),
       ),
     );
   }
