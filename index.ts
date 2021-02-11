@@ -10,7 +10,7 @@ export default (req: ServerRequest) => {
     req.respond({
       status: 404,
       headers: new Headers({ "Content-Type": "text" }),
-      body: "'text' parameter is required",
+      body: "'text' parameter is required. e.g. '?text=Hello%20world!'",
     });
     return;
   }
