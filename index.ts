@@ -22,10 +22,11 @@ export default (req: ServerRequest) => {
   const l4 = "#" + params.getStringValue("l4", "216e39");
   const bg = "#" + params.getStringValue("bg", "ffffff");
   const frame = "#" + params.getStringValue("frame", "000000");
+  const speed = params.getNumberValue("speed", 200);
 
   req.respond({
     status: 200,
     headers: new Headers({ "Content-Type": "image/svg+xml" }),
-    body: new Svg(text, [l0, l1, l2, l3, l4], bg, frame).render(),
+    body: new Svg(text, [l0, l1, l2, l3, l4], bg, frame,speed).render(),
   });
 };

@@ -9,7 +9,12 @@ const rectRadius = 2;
 const rectStep = rectSize + rectSpan;
 const rectStroke = "rgba(27,31,35,0.06)";
 const rectStrokeWidth = 2;
-const rect = (x: number, y: number, fill: string): string =>
+const rect = (
+  x: number,
+  y: number,
+  fill: string,
+  attrs?: { [key: string]: string },
+): string =>
   h("rect", {
     x: x * rectStep,
     y: y * rectStep,
@@ -20,6 +25,7 @@ const rect = (x: number, y: number, fill: string): string =>
     ry: rectRadius,
     stroke: rectStroke,
     "stroke-width": rectStrokeWidth,
+    ...attrs,
   });
 
 const width = rectStep * (weeks + 2) - rectSpan;
@@ -30,22 +36,38 @@ const legendPos = { x: width - rectStep * 7, y: height - rectSize * 2 };
 export class Svg {
   private textRects: string;
   private baseRects: string;
+  private scrollStyle: string;
   constructor(
     private text: string,
     private colors: string[],
     private bg: string,
     private frame: string,
+    private speed: number,
   ) {
     const pixelPositons = getPixelPositions(this.text);
 
     const steps = pixelPositons.length;
-    const offset = Math.ceil((weeks - steps) / 2);
+    const needScroll = steps > weeks;
+    const translateX = steps * rectStep;
+    this.scrollStyle = needScroll
+      ? h(
+        "style",
+        {},
+        `.pixel { animation: step ${this.speed *
+          steps}ms steps(${steps}) infinite; }
+          @keyframes step { to { transform:  translateX(-${translateX}px); } }`,
+      )
+      : "";
+    const offset = needScroll ? 1 : Math.ceil((weeks - steps) / 2);
     const getRandomColor = () =>
       this.colors[Math.floor(Math.random() * (this.colors.length - 1)) + 1];
     this.textRects = pixelPositons.map((line, x) =>
       line.map((y) => {
         const color = getRandomColor();
-        const ret = rect(x + offset, y, color);
+        const ret = rect(x + offset, y, color, { class: "pixel" });
+        if (needScroll && x < weeks - offset) {
+          return ret + rect(x + offset + steps, y, color, { class: "pixel" });
+        }
         return ret;
       }).join("")
     ).join("");
@@ -63,8 +85,17 @@ export class Svg {
       h(
         "g",
         { transform: `translate(${rectStep}, ${rectStep})` },
-        this.baseRects,
-        this.textRects,
+        h(
+          "g",
+          {},
+          this.baseRects,
+        ),
+        h(
+          "svg",
+          { width: width - rectStep * 2, height: height - rectStep * 2 },
+          this.scrollStyle,
+          this.textRects,
+        ),
       ),
       h(
         "g",
