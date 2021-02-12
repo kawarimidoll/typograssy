@@ -1,0 +1,5 @@
+{
+  "functions": {
+    "index.ts": { "runtime": "vercel-deno@0.7.6", "includeFiles": "src/*.*" }
+  }
+}
