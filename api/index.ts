@@ -65,7 +65,6 @@ export default (req: ServerRequest) => {
   req.respond({
     status: 200,
     headers,
-    body: new Svg(text, [l0, l1, l2, l3, l4], bg, frame, speed, comment)
-      .render(),
+    body: Svg.render(text, [l0, l1, l2, l3, l4], bg, frame, speed, comment),
   });
 };

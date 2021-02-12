@@ -36,43 +36,29 @@ const height = rectStep * (days + 3) - rectSpan;
 const legendPos = { x: width - rectStep * 7, y: height - rectSize * 2 };
 
 export class Svg {
-  private textRects: string;
-  private baseRects: string;
-  private style: string;
-
-  constructor(
-    private text: string,
-    private colors: string[],
-    private bg: string,
-    private frame: string,
-    private speed: number,
-    private comment: string,
-  ) {
-    const pixelPositons = getPixelPositions(this.text);
+  static render(
+    text: string,
+    colors: string[],
+    bg: string,
+    frame: string,
+    speed: number,
+    comment: string,
+  ): string {
+    const pixelPositons = getPixelPositions(text);
 
     const steps = pixelPositons.length;
     const needScroll = steps > weeks;
     const translateX = steps * rectStep;
-    const ms = this.speed * steps;
+    const ms = speed * steps;
     const scrollStyle = needScroll
       ? `#${svgID} #text-pixels { animation: step ${ms}ms steps(${steps}) infinite; }
           @keyframes step { to { transform:  translateX(-${translateX}px); } }`
       : "";
 
-    this.style = h(
-      "style",
-      {},
-      scrollStyle,
-      rectStyle,
-      ...this.colors.map((color, idx) =>
-        `#${svgID} .l${idx} { fill: ${color}; }`
-      ),
-    );
-
     const offset = needScroll ? 1 : Math.ceil((weeks - steps) / 2);
     const getRandomColor = () =>
-      Math.floor(Math.random() * (this.colors.length - 1)) + 1;
-    this.textRects = pixelPositons.map((line, x) =>
+      Math.floor(Math.random() * (colors.length - 1)) + 1;
+    const textRects = pixelPositons.map((line, x) =>
       line.map((y) => {
         const color = getRandomColor();
         const ret = rect(x + offset, y, color);
@@ -83,17 +69,21 @@ export class Svg {
       }).join("")
     ).join("");
 
-    this.baseRects = new Array(weeks * days).fill(0).map((_, i) =>
+    const baseRects = new Array(weeks * days).fill(0).map((_, i) =>
       rect(Math.floor(i / days), i % days, 0)
     ).join("");
-  }
 
-  render(): string {
     return h(
       "svg",
       { width, height, xmlns: "http://www.w3.org/2000/svg", id: svgID },
-      this.style,
-      h("rect", { width, height, stroke: this.frame, fill: this.bg }),
+      h(
+        "style",
+        {},
+        scrollStyle,
+        rectStyle,
+        ...colors.map((color, idx) => `#${svgID} .l${idx} { fill: ${color}; }`),
+      ),
+      h("rect", { width, height, stroke: frame, fill: bg }),
       h(
         "svg",
         {
@@ -102,18 +92,18 @@ export class Svg {
           width: width - rectStep * 2,
           height: height - rectStep * 2,
         },
-        h("g", {}, this.baseRects),
-        h("g", { id: "text-pixels" }, this.textRects),
+        h("g", {}, baseRects),
+        h("g", { id: "text-pixels" }, textRects),
       ),
       h(
         "g",
         { transform: `translate(${rectStep}, ${height - rectSize})` },
-        h("text", { "font-size": rectStep }, this.comment),
+        h("text", { "font-size": rectStep }, comment),
       ),
       h(
         "g",
         { transform: `translate(${legendPos.x}, ${legendPos.y})` },
-        this.colors.map((_, idx) => rect(idx, 0, idx)).join(""),
+        colors.map((_, idx) => rect(idx, 0, idx)).join(""),
       ),
     );
   }
