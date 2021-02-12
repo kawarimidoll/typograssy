@@ -1,4 +1,4 @@
-import { serve } from "./deps.ts";
+import { serve } from "./src/deps.ts";
 import requestHandler from "./index.ts";
 
 const port = 8080;

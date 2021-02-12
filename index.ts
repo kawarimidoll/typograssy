@@ -1,7 +1,7 @@
-import { ServerRequest } from "./deps.ts";
-import { parseParams } from "./utils.ts";
-import { Svg } from "./svg.ts";
-import colorNames from "./color-names.ts";
+import { ServerRequest } from "./src/deps.ts";
+import { parseParams } from "./src/utils.ts";
+import { Svg } from "./src/svg.ts";
+import colorNames from "./src/color-names.ts";
 const getValidColor = (str: string): string | null =>
   /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str)
     ? `#${str}`

@@ -1,7 +1,7 @@
 const CHARACTER_UNDEFINED = "/3/";
 const getEncodedCharacter = (char: string): string =>
   JSON.parse(
-    new TextDecoder().decode(Deno.readFileSync("./characters.json")),
+    new TextDecoder().decode(Deno.readFileSync("./src/characters.json")),
   )[char] || CHARACTER_UNDEFINED;
 
 // add a blank line to separate each character
