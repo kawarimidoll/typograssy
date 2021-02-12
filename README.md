@@ -19,8 +19,6 @@ text that you want to pixelize.
   - l2: `40c463`
   - l3: `30a14e`
   - l4: `216e39`
-  ffffff"));
-  000000"));
 
 color of pixels.
 

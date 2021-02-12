@@ -117,4 +117,20 @@ export class Svg {
       ),
     );
   }
+
+  static error(message: string): string {
+    return h(
+      "svg",
+      { width, height, xmlns: "http://www.w3.org/2000/svg", id: svgID },
+      h(
+        "g",
+        { transform: `translate(${width / 2}, ${height / 2 + rectSize})` },
+        h(
+          "text",
+          { "font-size": rectSize * 2, "text-anchor": "middle" },
+          message,
+        ),
+      ),
+    );
+  }
 }
