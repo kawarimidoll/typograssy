@@ -2,15 +2,17 @@ import { ServerRequest } from "./deps.ts";
 import { parseParams } from "./utils.ts";
 import { Svg } from "./svg.ts";
 import colorNames from "./color-names.ts";
+
+// cache two hours
+const CACHE_MAX_AGE = 7200;
+const MAX_STRING_LENGTH = 70;
+
 const getValidColor = (str: string): string | null =>
   /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str)
     ? `#${str}`
     : colorNames.includes(str)
     ? str
     : null;
-
-const CACHE_MAX_AGE = 7200;
-const MAX_STRING_LENGTH = 70;
 
 export default (req: ServerRequest) => {
   const headers = new Headers({
