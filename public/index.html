@@ -84,7 +84,6 @@
           <input
             type="text"
             id="text"
-            value="Hello world!"
             placeholder="required"
             maxlength="70"
             required
@@ -139,6 +138,7 @@
 
     <script>
       const defaults = {
+        text: "Hello world!",
         l0: "#ebedf0",
         l1: "#9be9a8",
         l2: "#40c463",
@@ -163,29 +163,32 @@
 
       const callAPI = () => {
         const params = [];
-        if (text.value) {
-          params.push(["text", text.value]);
-        }
 
         Object.entries(defaults).forEach(([key, defaultValue]) => {
           const userValue = document.getElementById(key).value;
-          if (userValue !== `${defaultValue}`) {
+          if (key === "text") {
+            if (userValue) {
+              params.push(["text", userValue]);
+            }
+          } else if (userValue !== `${defaultValue}`) {
             params.push([key, formatValue(key, userValue)]);
           }
         });
 
-        const apiURL = `https://typograssy.vercel.app/api?${params
-          .map(([key, value]) => key + "=" + value)
-          .join("&")}`;
+        const apiURL = `https://typograssy.vercel.app/api?${encodeURI(
+          params.map(([key, value]) => key + "=" + value).join("&")
+        )}`;
 
         output.value = apiURL;
         img.src = apiURL;
       };
 
-      const resetParams = () =>
+      const resetParams = () => {
         Object.entries(defaults).forEach(([key, defaultValue]) => {
           document.getElementById(key).value = defaultValue;
         });
+        callAPI();
+      }
 
       const copyURL = () => {
         // ref: https://github.com/kognise/water.css/blob/master/docs/script.js
@@ -208,14 +211,13 @@
           );
       };
 
-      ["text", ...Object.keys(defaults)].forEach((key) => {
+      Object.keys(defaults).forEach((key) => {
         document
           .getElementById(key)
           .addEventListener("input", window.throttle(callAPI, 2000));
       });
 
       resetParams();
-      callAPI();
     </script>
   </body>
 </html>
