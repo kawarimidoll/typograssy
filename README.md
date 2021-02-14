@@ -81,9 +81,19 @@ The comment on left bottom. It need to be less than 70 characters.
 - html color name. e.g. `red`, `aqua`
 - `none`.
 
+## Contribution
+
+All contributions are welcome!
+
+### Local run
+
+```bash
+deno run --allow-net --allow-read debug.ts
+```
+
 ## Related pages
 
-- Runtime: [Deno](https://deno.land/)
+- Runtime: [Deno](https://deno.land/), [vercel-deno](https://github.com/TooTallNate/vercel-deno)
 - Font: [美咲フォント](https://littlelimit.net/misaki.htm)
 - Style of GUI page: [Water.css](https://github.com/kognise/water.css)
 - Hosting: [Vercel](https://vercel.com/)
