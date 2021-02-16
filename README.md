@@ -1,8 +1,24 @@
-# ![header](https://typograssy.vercel.app/api?text=Typograssy)
+<h1 align="center">
+  <img alt="header" src="https://typograssy.vercel.app/api?text=Typograssy&frame=none&comment=">
+</h1>
 
 Generate SVG image like GitHub contribution graph (github-grass) with API.
 
-You can configure the URL in [this page](https://typograssy.vercel.app/) with seeing preview.
+You can configure the URL in [the online editor](https://typograssy.vercel.app/) with seeing preview.
+
+## Quick start
+
+Markdown:
+
+```md
+[![typograssy](https://typograssy.vercel.app/api?text=Hello%20world!)](https://github.com/kawarimidoll/typograssy)
+```
+
+HTML:
+
+```html
+<a href="https://github.com/kawarimidoll/typograssy"><img alt="typograssy" src="https://typograssy.vercel.app/api?text=Hello%20world!"></a>
+```
 
 ## Features
 
