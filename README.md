@@ -1,3 +1,4 @@
+<!-- deno-lint-ignore-file -->
 <h1 align="center">
   <img alt="header" src="https://typograssy.vercel.app/api?text=Typograssy&frame=none&comment=">
 </h1>
