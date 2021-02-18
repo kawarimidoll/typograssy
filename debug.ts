@@ -1,5 +1,5 @@
 import { serve } from "./api/deps.ts";
-import requestHandler from "./api/index.ts";
+import requestHandler from "./api/server.ts";
 
 const port = 8080;
 const server = serve({ port });
