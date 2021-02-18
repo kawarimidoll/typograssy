@@ -1,7 +1,7 @@
 import { ServerRequest } from "./deps.ts";
 import { parseParams } from "./utils.ts";
 import { Svg } from "./svg.ts";
-import colorNames from "./color-names.ts";
+import colorNames from "./color_names.ts";
 
 // cache two hours
 const CACHE_MAX_AGE = 7200;

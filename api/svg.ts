@@ -1,4 +1,4 @@
-import getPixelPositions from "./get-pixel-positions.ts";
+import getPixelPositions from "./get_pixel_positions.ts";
 import h from "./tag.ts";
 
 const svgID = "typograssy";
