@@ -1,8 +1,9 @@
-export default (
+/** Generate XML tag. */
+export default function (
   tagName: string,
   attributes: { [attr: string]: string | number },
   ...children: string[]
-): string => {
+): string {
   const isVoidTag = [
     "area",
     "base",
@@ -20,10 +21,9 @@ export default (
   ].includes(tagName);
 
   const attrs = Object.entries(attributes)
-    .map(([k, v]) => ` ${k}="${v}"`)
-    .join("");
+    .reduce((acc, [k, v]) => `${acc} ${k}="${v}"`, "");
 
   const close = isVoidTag ? "" : `${children.join("")}</${tagName}>`;
 
   return `<${tagName}${attrs}>${close}`;
-};
+}

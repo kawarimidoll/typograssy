@@ -10,10 +10,11 @@ const getCharacterArray = (char: string): number[][] =>
     .split("/")
     .map((p) => p.split("").map((n) => Number(n)));
 
-export default (text: string): number[][] =>
-  text
+export default function (text: string): number[][] {
+  return text
     .split("")
     .reduce(
       (acc, crnt) => acc.concat(getCharacterArray(crnt)),
       [] as number[][],
     );
+}

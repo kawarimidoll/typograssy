@@ -14,7 +14,7 @@ const getValidColor = (str: string): string | null =>
     ? str
     : null;
 
-export default (req: ServerRequest) => {
+export default function (req: ServerRequest) {
   const headers = new Headers({
     "Content-Type": "image/svg+xml",
     "Cache-Control": `public, max-age=${CACHE_MAX_AGE}`,
@@ -69,4 +69,4 @@ export default (req: ServerRequest) => {
     headers,
     body: Svg.render(text, [l0, l1, l2, l3, l4], bg, frame, speed, comment),
   });
-};
+}
