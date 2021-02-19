@@ -1,8 +1,8 @@
+import characters from "./characters.ts";
+
 const CHARACTER_UNDEFINED = "/3/";
 const getEncodedCharacter = (char: string): string =>
-  JSON.parse(
-    new TextDecoder().decode(Deno.readFileSync("./api/characters.json")),
-  )[char] || CHARACTER_UNDEFINED;
+  characters[char] || CHARACTER_UNDEFINED;
 
 // add a blank line to separate each character
 const getCharacterArray = (char: string): number[][] =>

@@ -105,7 +105,7 @@ All contributions are welcome!
 ### Local run
 
 ```bash
-deno run --allow-net=:8080 --allow-read=api/characters.json debug.ts
+deno run --allow-net=:8080 debug.ts
 ```
 
 ### Format files
