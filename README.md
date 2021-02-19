@@ -1,4 +1,4 @@
-<!-- deno-lint-ignore-file -->
+<!-- deno-fmt-ignore-file -->
 <h1 align="center">
   <img alt="header" src="https://typograssy.vercel.app/api?text=Typograssy&frame=none&comment=">
 </h1>
@@ -105,7 +105,19 @@ All contributions are welcome!
 ### Local run
 
 ```bash
-deno run --allow-net --allow-read debug.ts
+deno run --allow-net=:8080 --allow-read=api/characters.json debug.ts
+```
+
+### Format files
+
+```bash
+deno fmt
+```
+
+### Lint files
+
+```bash
+deno lint --unstable
 ```
 
 ## Related pages
