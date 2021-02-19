@@ -1,11 +1,11 @@
-<!-- deno-fmt-ignore-file -->
 <h1 align="center">
   <img alt="header" src="https://typograssy.vercel.app/api?text=Typograssy&frame=none&comment=">
 </h1>
 
 Generate SVG image like GitHub contribution graph (github-grass) with API.
 
-You can configure the URL in [the online editor](https://typograssy.vercel.app/) with seeing preview.
+You can configure the URL in [the online editor](https://typograssy.vercel.app/)
+with seeing preview.
 
 ## Quick start
 
@@ -35,17 +35,20 @@ See [parameters](#parameters) section.
 
 The pixels will scroll if the text can't be show at once.
 
-:bulb: You should put 'trailing space' to the URL to separate the last character and the first one.
+:bulb: You should put 'trailing space' to the URL to separate the last character
+and the first one.
 
 ## :jp: Japanese support
 
 ![japanese](https://typograssy.vercel.app/api?text=東京スカイツリーの高さは６３４ｍです。)
 
-You can check supported characters on [api/characters.json](https://github.com/kawarimidoll/typograssy/blob/main/api/characters.json).
+You can check supported characters on
+[api/characters.json](https://github.com/kawarimidoll/typograssy/blob/main/api/characters.json).
 
 ## Parameters
 
-:warning: Follow the [color value format](#color-value-format) when you change the colors.
+:warning: Follow the [color value format](#color-value-format) when you change
+the colors.
 
 ### text [required]
 
@@ -63,7 +66,8 @@ The text that you want to show. It need to be less than 70 characters.
   - l3: `30a14e`
   - l4: `216e39`
 
-The color of the pixels. `l0` is used as base color, the others are used as font color at random.
+The color of the pixels. `l0` is used as base color, the others are used as font
+color at random.
 
 ### bg
 
@@ -94,6 +98,7 @@ The speed of scrolling. `200` means that move 1 pixel per 200 milliseconds.
 The comment on left bottom. It need to be less than 70 characters.
 
 ## Color value format
+
 - hex value without hash symbol. e.g. `000`, `123abc`
 - html color name. e.g. `red`, `aqua`
 - `none`.
@@ -120,10 +125,18 @@ deno fmt
 deno lint --unstable
 ```
 
+### Run tests
+
+```bash
+deno test
+```
+
 ## Related pages
 
-- Runtime: [Deno](https://deno.land/), [vercel-deno](https://github.com/TooTallNate/vercel-deno)
+- Runtime: [Deno](https://deno.land/),
+  [vercel-deno](https://github.com/TooTallNate/vercel-deno)
 - Font: [美咲フォント](https://littlelimit.net/misaki.htm)
 - Style of GUI page: [Water.css](https://github.com/kognise/water.css)
 - Hosting: [Vercel](https://vercel.com/)
-- Reference: [Github Profile Trophy](https://github.com/ryo-ma/github-profile-trophy)
+- Inspired:
+  [Github Profile Trophy](https://github.com/ryo-ma/github-profile-trophy)
