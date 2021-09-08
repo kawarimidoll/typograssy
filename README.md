@@ -43,7 +43,7 @@ and the first one.
 ![japanese](https://typograssy.vercel.app/api?text=東京スカイツリーの高さは６３４ｍです。)
 
 You can check supported characters on
-[api/characters.json](https://github.com/kawarimidoll/typograssy/blob/main/api/characters.json).
+[api/characters.ts](api/characters.ts).
 
 ## Parameters
 
