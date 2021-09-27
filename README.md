@@ -42,8 +42,7 @@ and the first one.
 
 ![japanese](https://typograssy.vercel.app/api?text=東京スカイツリーの高さは６３４ｍです。)
 
-You can check supported characters on
-[api/characters.ts](api/characters.ts).
+You can check supported characters on [api/characters.ts](api/characters.ts).
 
 ## Parameters
 
