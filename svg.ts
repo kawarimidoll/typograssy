@@ -1,5 +1,5 @@
 import getPixelPositions from "./get_pixel_positions.ts";
-import h from "./tag.ts";
+import { tag as h } from "./deps.ts";
 
 const svgID = "typograssy";
 
@@ -44,9 +44,9 @@ export class Svg {
     speed: number,
     comment: string,
   ): string {
-    const pixelPositons = getPixelPositions(text);
+    const pixelPositions = getPixelPositions(text);
 
-    const steps = pixelPositons.length;
+    const steps = pixelPositions.length;
     const needScroll = steps > weeks;
     const translateX = steps * rectStep;
     const ms = speed * steps;
@@ -58,7 +58,7 @@ export class Svg {
     const offset = needScroll ? 1 : Math.ceil((weeks - steps) / 2);
     const getRandomColor = () =>
       Math.floor(Math.random() * (colors.length - 1)) + 1;
-    const textRects = pixelPositons.map((line, x) =>
+    const textRects = pixelPositions.map((line, x) =>
       line.map((y) => {
         const color = getRandomColor();
         const ret = rect(x + offset, y, color);
@@ -78,7 +78,6 @@ export class Svg {
       { width, height, xmlns: "http://www.w3.org/2000/svg", id: svgID },
       h(
         "style",
-        {},
         scrollStyle,
         rectStyle,
         ...colors.map((color, idx) => `#${svgID} .l${idx} { fill: ${color}; }`),
@@ -92,7 +91,7 @@ export class Svg {
           width: width - rectStep * 2,
           height: height - rectStep * 2,
         },
-        h("g", {}, baseRects),
+        h("g", baseRects),
         h("g", { id: "text-pixels" }, textRects),
       ),
       h(

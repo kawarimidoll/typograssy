@@ -1,4 +1,5 @@
 /// <reference path="./_deploy.d.ts" />
+import { apiHandler } from "./api_handler.ts";
 
 const listener = Deno.listen({ port: 8080 });
 if (!Deno.env.get("DENO_DEPLOYMENT_ID")) {
@@ -14,8 +15,8 @@ async function handleConn(conn: Deno.Conn) {
 }
 
 async function handler(request: Request) {
-  const { href, origin, host, pathname, hash, search } = new URL(request.url);
-  console.log({ href, origin, host, pathname, hash, search });
+  const { href, pathname, searchParams } = new URL(request.url);
+  console.log({ href, pathname });
 
   if (pathname === "/") {
     return new Response(await Deno.readFile("./index.html"), {
@@ -29,9 +30,7 @@ async function handler(request: Request) {
   }
 
   if (pathname === "/api") {
-    return new Response(await Deno.readFile("./favicon.svg"), {
-      headers: { "Content-Type": "image/svg+xml" },
-    });
+    return apiHandler(searchParams);
   }
 
   return new Response("404 Not Found", {
