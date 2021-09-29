@@ -1,11 +1,6 @@
 {
-  "functions": {
-    "api/**/server.ts": {
-      "runtime": "vercel-deno@1.1.0",
-      "includeFiles": "api/**/*.*"
-    }
-  },
-  "rewrites": [
-    { "source": "/api", "destination": "/api/server" }
+  "redirects": [
+    { "source": "/api", "destination": "https://typograssy.deno.dev/api" },
+    { "source": "/", "destination": "https://typograssy.deno.dev" }
   ]
 }
