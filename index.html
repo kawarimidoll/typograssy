@@ -144,7 +144,7 @@
           }
         });
 
-        const apiURL = `https://typograssy.vercel.app/api?${encodeURI(
+        const apiURL = `${location.origin}/api?${encodeURI(
           params.map(([key, value]) => key + "=" + value).join("&")
         )}`;
 
