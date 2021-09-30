@@ -10,7 +10,7 @@ const getCharacterArray = (char: string): number[][] =>
     .split("/")
     .map((p) => p.split("").map((n) => Number(n)));
 
-export default function (text: string): number[][] {
+export function getPixelPositions(text: string): number[][] {
   return text
     .split("")
     .reduce(
