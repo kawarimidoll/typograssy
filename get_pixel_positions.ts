@@ -1,20 +1,19 @@
-import characters from "./characters.ts";
+import { PIXEL_CHARACTERS } from "./characters.ts";
 
-const CHARACTER_UNDEFINED = "/3/";
-const getEncodedCharacter = (char: string): string =>
-  characters[char] || CHARACTER_UNDEFINED;
+export function getEncodedCharacter(char: string): string {
+  const undefinedCharacter = "/3/";
+  return PIXEL_CHARACTERS[char] || undefinedCharacter;
+}
 
 // add a blank line to separate each character
-const getCharacterArray = (char: string): number[][] =>
-  `${getEncodedCharacter(char)}/`
-    .split("/")
+export function getCharacterArray(char: string): number[][] {
+  return `${getEncodedCharacter(char)}/`.split("/")
     .map((p) => p.split("").map((n) => Number(n)));
+}
 
 export function getPixelPositions(text: string): number[][] {
-  return text
-    .split("")
-    .reduce(
-      (acc, crnt) => acc.concat(getCharacterArray(crnt)),
-      [] as number[][],
-    );
+  return [...text].reduce(
+    (acc, current) => acc.concat(getCharacterArray(current)),
+    [] as number[][],
+  );
 }
