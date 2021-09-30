@@ -15,18 +15,18 @@ const getValidColor = (str: string): string | null =>
     ? str
     : null;
 
-export function apiHandler(searchParams: URLSearchParams): Response {
-  const headers = new Headers({
-    "Content-Type": "image/svg+xml",
-    "Cache-Control": `public, max-age=${CACHE_MAX_AGE}`,
-  });
+export const apiHeaders = new Headers({
+  "Content-Type": "image/svg+xml",
+  "Cache-Control": `public, max-age=${CACHE_MAX_AGE}`,
+});
 
+export function apiHandler(searchParams: URLSearchParams): Response {
   const errorRes = (message: string): Response => {
     return new Response(
       Svg.error(message),
       {
         status: 400,
-        headers,
+        headers: apiHeaders,
       },
     );
   };
@@ -74,7 +74,7 @@ export function apiHandler(searchParams: URLSearchParams): Response {
     Svg.render(text, colors, bg, frame, speed, comment),
     {
       status: 200,
-      headers,
+      headers: apiHeaders,
     },
   );
 }
