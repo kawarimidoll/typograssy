@@ -1,10 +1,10 @@
 <h1 align="center">
-  <img alt="header" src="https://typograssy.vercel.app/api?text=Typograssy&frame=none&comment=">
+  <img alt="header" src="https://typograssy.deno.dev/api?text=Typograssy&frame=none&comment=">
 </h1>
 
 Generate SVG image like GitHub contribution graph (github-grass) with API.
 
-You can configure the URL in [the online editor](https://typograssy.vercel.app/)
+You can configure the URL in [the online editor](https://typograssy.deno.dev/)
 with seeing preview.
 
 ## Quick start
@@ -12,26 +12,26 @@ with seeing preview.
 Markdown:
 
 ```md
-[![typograssy](https://typograssy.vercel.app/api?text=Hello%20world!)](https://github.com/kawarimidoll/typograssy)
+[![typograssy](https://typograssy.deno.dev/api?text=Hello%20world!)](https://github.com/kawarimidoll/typograssy)
 ```
 
 HTML:
 
 ```html
-<a href="https://github.com/kawarimidoll/typograssy"><img alt="typograssy" src="https://typograssy.vercel.app/api?text=Hello%20world!"></a>
+<a href="https://github.com/kawarimidoll/typograssy"><img alt="typograssy" src="https://typograssy.deno.dev/api?text=Hello%20world!"></a>
 ```
 
 ## Features
 
 ### :gear: Configurable
 
-![color](https://typograssy.vercel.app/api?text=Hello%20world!&l1=9ba8e9&l2=6d74d9&l3=5057b9&l4=21226e)
+![color](https://typograssy.deno.dev/api?text=Hello%20world!&l1=9ba8e9&l2=6d74d9&l3=5057b9&l4=21226e)
 
 See [parameters](#parameters) section.
 
 ### :scroll: Auto-scrolling
 
-![scroll](https://typograssy.vercel.app/api?text=Hello%20developer!%20)
+![scroll](https://typograssy.deno.dev/api?text=Hello%20developer!%20)
 
 The pixels will scroll if the text can't be show at once.
 
@@ -40,7 +40,7 @@ and the first one.
 
 ## :jp: Japanese support
 
-![japanese](https://typograssy.vercel.app/api?text=東京スカイツリーの高さは６３４ｍです。)
+![japanese](https://typograssy.deno.dev/api?text=東京スカイツリーの高さは６３４ｍです。)
 
 You can check supported characters on [api/characters.ts](api/characters.ts).
 
