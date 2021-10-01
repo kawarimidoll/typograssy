@@ -34,7 +34,7 @@ export function apiHandler(searchParams: URLSearchParams): Response {
   const params = new CustomURLSearchParams(searchParams);
 
   const text = params.get("text");
-  if (text === null) {
+  if (!text) {
     return errorRes("'text' parameter is required. e.g. 'text=Hello%20world!'");
   } else if (text.length > MAX_STRING_LENGTH) {
     return errorRes(
@@ -71,7 +71,7 @@ export function apiHandler(searchParams: URLSearchParams): Response {
   const [bg, frame, ...colors] = colorParams as string[];
 
   return new Response(
-    Svg.render(text, colors, bg, frame, speed, comment),
+    Svg.render({ text, colors, bg, frame, speed, comment }),
     {
       status: 200,
       headers: apiHeaders,

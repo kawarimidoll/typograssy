@@ -29,11 +29,11 @@ Deno.test("success", async () => {
   ];
   const bg = "#ff0000";
   const frame = "#ff00ff";
-  const speed = 200;
+  // const speed = 200;
   const comment = "super comment";
 
   assertEquals(
-    Svg.render(text, colors, bg, frame, speed, comment).replace(
+    Svg.render({ text, colors, bg, frame, comment }).replace(
       levels,
       "level",
     ),
