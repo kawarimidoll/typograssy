@@ -8,12 +8,13 @@ const MAX_STRING_LENGTH = 70;
 
 const colorNames = Object.keys(W3C_COLOR_NAMES);
 
-const getValidColor = (str: string): string | null =>
-  /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str)
+export function getValidColor(str: string): string | null {
+  return /^[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/.test(str)
     ? `#${str}`
-    : colorNames.includes(str)
+    : colorNames.includes(str) || str === "none"
     ? str
     : null;
+}
 
 export const apiHeaders = new Headers({
   "Content-Type": "image/svg+xml",

@@ -1,7 +1,7 @@
 import { assertEquals } from "./deps.ts";
-import { apiHandler, apiHeaders } from "./api_handler.ts";
+import { apiHandler, apiHeaders, getValidColor } from "./api_handler.ts";
 
-Deno.test("error", async () => {
+Deno.test("[apiHandler] error", async () => {
   const resultSvg = await Deno.readTextFile(
     "./resources/tests/test_error.svg",
   );
@@ -18,7 +18,7 @@ Deno.test("error", async () => {
   );
 });
 
-Deno.test("success", async () => {
+Deno.test("[apiHandler] success", async () => {
   const resultSvg = await Deno.readTextFile(
     "./resources/tests/test_render.svg",
   );
@@ -48,5 +48,36 @@ Deno.test("success", async () => {
   assertEquals(
     svg.replace(levels, "level"),
     resultSvg.trim().replace(levels, "level"),
+  );
+});
+
+Deno.test("[getValidColor] check colors", () => {
+  assertEquals(
+    getValidColor("abc123"),
+    "#abc123",
+  );
+  assertEquals(
+    getValidColor("a91"),
+    "#a91",
+  );
+  assertEquals(
+    getValidColor("floralwhite"),
+    "floralwhite",
+  );
+  assertEquals(
+    getValidColor("none"),
+    "none",
+  );
+  assertEquals(
+    getValidColor("#123"),
+    null,
+  );
+  assertEquals(
+    getValidColor("12345"),
+    null,
+  );
+  assertEquals(
+    getValidColor("firered"),
+    null,
   );
 });
