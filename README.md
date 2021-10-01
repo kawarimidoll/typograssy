@@ -2,6 +2,11 @@
   <img alt="header" src="https://typograssy.deno.dev/api?text=Typograssy&frame=none&comment=">
 </h1>
 
+[![ci](https://github.com/kawarimidoll/typograssy/workflows/ci/badge.svg)](.github/workflows/ci.yml)
+[![deno.land](https://img.shields.io/badge/deno-%5E1.14.0-green?logo=deno)](https://deno.land)
+[![vr scripts](https://badges.velociraptor.run/flat.svg)](https://velociraptor.run)
+[![LICENSE](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
+
 Generate SVG image like GitHub contribution graph (github-grass) with API.
 
 You can configure the URL in [the online editor](https://typograssy.deno.dev/)
@@ -42,7 +47,7 @@ and the first one.
 
 ![japanese](https://typograssy.deno.dev/api?text=東京スカイツリーの高さは６３４ｍです。)
 
-You can check supported characters on [api/characters.ts](api/characters.ts).
+You can check supported characters on [characters.ts](characters.ts).
 
 ## Parameters
 
@@ -98,44 +103,59 @@ The comment on left bottom. It need to be less than 70 characters.
 
 ## Color value format
 
-- hex value without hash symbol. e.g. `000`, `123abc`
-- html color name. e.g. `red`, `aqua`
+- hex value without hash symbol. e.g. `000`, `123abc`.
+- [html color name](w3c_color_names.ts). e.g. `red`, `aqua`.
 - `none`.
 
 ## Contribution
 
 All contributions are welcome!
 
+## Develop
+
+This project is using [Velociraptor](https://velociraptor.run/) as a task
+runner.
+
+Confirm there is `~/.deno/bin` in `$PATH` to use the scripts installed by
+`deno install`.
+
+```
+$ # install velociraptor
+$ deno install -qAn vr https://deno.land/x/velociraptor/cli.ts
+$ # install hook
+$ vr
+```
+
+The scripts are defined in [velociraptor.yml](velociraptor.yml).
+
 ### Local run
 
 ```bash
-deno run --allow-net=:8080 debug.ts
+vr server
 ```
 
 ### Format files
 
 ```bash
-deno fmt
+vr fmt
 ```
 
 ### Lint files
 
 ```bash
-deno lint --unstable
+vr lint
 ```
 
 ### Run tests
 
 ```bash
-deno test
+vr test
 ```
 
 ## Related pages
 
-- Runtime: [Deno](https://deno.land/),
-  [vercel-deno](https://github.com/TooTallNate/vercel-deno)
+- Runtime: [Deno](https://deno.land/), [Deno Deploy](https://deno.com/deploy)
 - Font: [美咲フォント](https://littlelimit.net/misaki.htm)
 - Style of GUI page: [Water.css](https://github.com/kognise/water.css)
-- Hosting: [Vercel](https://vercel.com/)
 - Inspired:
   [Github Profile Trophy](https://github.com/ryo-ma/github-profile-trophy)
