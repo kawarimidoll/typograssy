@@ -1,10 +1,19 @@
 import { assertEquals } from "./deps.ts";
-import { apiHandler, apiHeaders, getValidColor } from "./api_handler.ts";
+import {
+  apiHandler,
+  apiHeaders,
+  errorMessages,
+  getValidColor,
+} from "./api_handler.ts";
 
-Deno.test("[apiHandler] error", async () => {
-  const resultSvg = await Deno.readTextFile(
-    "./resources/tests/test_error.svg",
-  );
+const errorSvg = await Deno.readTextFile(
+  "./resources/tests/test_error.svg",
+);
+function loadErrorSvg(msg: string) {
+  return errorSvg.trim().replace("ERROR_MESSAGE", msg);
+}
+
+Deno.test("[apiHandler] error: no text parameter", async () => {
   const response = apiHandler(new URLSearchParams(""));
   const headers = response.headers;
   const svg = await response.text();
@@ -14,12 +23,61 @@ Deno.test("[apiHandler] error", async () => {
   );
   assertEquals(
     svg,
-    resultSvg.trim(),
+    loadErrorSvg(errorMessages.noText),
+  );
+});
+
+Deno.test("[apiHandler] error: too long text parameter", async () => {
+  const text =
+    "This is a too long text parameter that cannot be rendered by Typograssy";
+
+  const response = apiHandler(new URLSearchParams({ text }));
+  const headers = response.headers;
+  const svg = await response.text();
+  assertEquals(
+    headers.entries(),
+    apiHeaders.entries(),
+  );
+  assertEquals(
+    svg,
+    loadErrorSvg(errorMessages.tooLongText),
+  );
+});
+
+Deno.test("[apiHandler] error: too long comment parameter", async () => {
+  const text = "a";
+  const comment =
+    "This is a too long text parameter that cannot be rendered by Typograssy";
+
+  const response = apiHandler(new URLSearchParams({ text, comment }));
+  const headers = response.headers;
+  const svg = await response.text();
+  assertEquals(
+    headers.entries(),
+    apiHeaders.entries(),
+  );
+  assertEquals(
+    svg,
+    loadErrorSvg(errorMessages.tooLongComment),
+  );
+});
+
+Deno.test("[apiHandler] error: invalid color", async () => {
+  const response = apiHandler(new URLSearchParams({ text: "a", l0: "a" }));
+  const headers = response.headers;
+  const svg = await response.text();
+  assertEquals(
+    headers.entries(),
+    apiHeaders.entries(),
+  );
+  assertEquals(
+    svg,
+    loadErrorSvg(errorMessages.invalidColor),
   );
 });
 
 Deno.test("[apiHandler] success", async () => {
-  const resultSvg = await Deno.readTextFile(
+  const successSvg = await Deno.readTextFile(
     "./resources/tests/test_render.svg",
   );
 
@@ -47,7 +105,7 @@ Deno.test("[apiHandler] success", async () => {
   );
   assertEquals(
     svg.replace(levels, "level"),
-    resultSvg.trim().replace(levels, "level"),
+    successSvg.trim().replace(levels, "level"),
   );
 });
 

@@ -5,9 +5,10 @@ Deno.test("error", async () => {
   const resultSvg = await Deno.readTextFile(
     "./resources/tests/test_error.svg",
   );
+  const msg = "this is an error message!";
   assertEquals(
-    Svg.error("'text' parameter is required. e.g. 'text=Hello%20world!'"),
-    resultSvg.trim(),
+    Svg.error(msg),
+    resultSvg.trim().replace("ERROR_MESSAGE", msg),
   );
 });
 
@@ -40,5 +41,3 @@ Deno.test("success", async () => {
     resultSvg.trim().replace(levels, "level"),
   );
 });
-// /api
-// api?text=This%20is%20text%20&l0=000000&l1=000000&l2=000000&l3=000000&l4=000000&bg=ff0000&frame=00ff00&comment=super%20comment
