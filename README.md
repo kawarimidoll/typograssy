@@ -119,11 +119,11 @@ runner.
 Confirm there is `~/.deno/bin` in `$PATH` to use the scripts installed by
 `deno install`.
 
-```
-$ # install velociraptor
-$ deno install -qAn vr https://deno.land/x/velociraptor/cli.ts
-$ # install hook
-$ vr
+```bash
+# install velociraptor
+deno install -qAn vr https://deno.land/x/velociraptor/cli.ts
+# install hook
+vr
 ```
 
 The scripts are defined in [velociraptor.yml](velociraptor.yml).
