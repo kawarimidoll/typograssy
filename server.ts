@@ -1,18 +1,4 @@
-/// <reference path="./_deploy.d.ts" />
 import { apiHandler } from "./api_handler.ts";
-
-const port = 8080;
-const listener = Deno.listen({ port });
-if (!Deno.env.get("DENO_DEPLOYMENT_ID")) {
-  console.log(`HTTP server listening on http://localhost:${port}`);
-}
-
-async function handleConn(conn: Deno.Conn) {
-  const httpConn = Deno.serveHttp(conn);
-  for await (const e of httpConn) {
-    e.respondWith(handler(e.request));
-  }
-}
 
 async function handler(request: Request) {
   const { pathname, searchParams } = new URL(request.url);
@@ -38,6 +24,6 @@ async function handler(request: Request) {
   });
 }
 
-for await (const conn of listener) {
-  handleConn(conn);
-}
+Deno.serve(async (request: Request) => {
+  return await handler(request);
+});
