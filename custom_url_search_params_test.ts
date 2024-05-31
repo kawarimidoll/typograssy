@@ -1,4 +1,4 @@
-import { assertEquals } from "./deps.ts";
+import { assertEquals } from "@std/assert";
 import { CustomURLSearchParams } from "./custom_url_search_params.ts";
 
 const url = "https://test.com/api?text=hello&speed=100&flg=true&ng=false";

@@ -1,5 +1,7 @@
 import { getPixelPositions } from "./get_pixel_positions.ts";
-import { randomInteger, range, tag as h } from "./deps.ts";
+import { range } from "./deps.ts";
+import { randInt } from "@ns/random";
+import { tag as h } from "markup_tag";
 
 const svgID = "typograssy";
 const xmlns = "http://www.w3.org/2000/svg";
@@ -73,7 +75,7 @@ export class Svg {
 
     const textRects = pixelPositions.map((line, x) =>
       line.map((y) => {
-        const color = randomInteger(1, colors.length - 1);
+        const color = randInt(1, colors.length - 1);
         const ret = rect(x + offset, y, color);
         if (needScroll && x < weeks - offset) {
           return ret + rect(x + offset + steps, y, color);

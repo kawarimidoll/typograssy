@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@ns/random": "jsr:@ns/random@^0.1.1",
+    "@std/assert": "jsr:@std/assert@^0.225.3",
+    "markup_tag": "https://deno.land/x/markup_tag@0.4.0/mod.ts"
+  }
+}
