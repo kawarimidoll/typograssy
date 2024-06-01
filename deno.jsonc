@@ -4,5 +4,14 @@
     "@ns/random": "jsr:@ns/random@^0.1.1",
     "@std/assert": "jsr:@std/assert@^0.225.3",
     "markup_tag": "https://deno.land/x/markup_tag@0.4.0/mod.ts"
+  },
+  "tasks": {
+    "run": "deno run --allow-net=0.0.0.0:8000 --allow-read=. --watch server.ts",
+
+    "test": "deno test --reload --allow-read=. --allow-none",
+    "cov": "deno task test --coverage=cov_profile; deno coverage cov_profile",
+    "lint": "deno lint --ignore=cov_profile",
+    "fmt": "deno fmt --ignore=cov_profile",
+    "ci": "deno task lint && deno task fmt --check && deno task test"
   }
 }
