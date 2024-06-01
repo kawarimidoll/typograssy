@@ -2,11 +2,15 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@hugoalh/range-iterator@^2.0.3": "jsr:@hugoalh/range-iterator@2.0.3",
       "jsr:@ns/random@^0.1.1": "jsr:@ns/random@0.1.1",
       "jsr:@std/assert@^0.225.3": "jsr:@std/assert@0.225.3",
       "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0"
     },
     "jsr": {
+      "@hugoalh/range-iterator@2.0.3": {
+        "integrity": "f1614bdeaa7bd0e3c7f13dce17ff2060dbebc8df5e1ebf42a885bd25b86bbebf"
+      },
       "@ns/random@0.1.1": {
         "integrity": "e1af978385cd6e4417882d642c0e7157b7d355eed9e4f986e350a5126d39a8f5"
       },
