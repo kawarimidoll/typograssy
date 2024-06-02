@@ -4,7 +4,6 @@
 
 [![ci](https://github.com/kawarimidoll/typograssy/workflows/ci/badge.svg)](.github/workflows/ci.yml)
 [![deno.land](https://img.shields.io/badge/deno-%5E1.14.0-green?logo=deno)](https://deno.land)
-[![vr scripts](https://badges.velociraptor.run/flat.svg)](https://velociraptor.run)
 [![LICENSE](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
 Generate SVG image like GitHub contribution graph (github-grass) with API.
@@ -113,43 +112,30 @@ All contributions are welcome!
 
 ## Develop
 
-This project is using [Velociraptor](https://velociraptor.run/) as a task
-runner.
-
-Confirm there is `~/.deno/bin` in `$PATH` to use the scripts installed by
-`deno install`.
-
-```bash
-# install velociraptor
-deno install -qAn vr https://deno.land/x/velociraptor/cli.ts
-# install hook
-vr
-```
-
-The scripts are defined in [velociraptor.yml](velociraptor.yml).
+See defined tasks to run `deno task`.
 
 ### Local run
 
 ```bash
-vr server
+deno task run
 ```
 
 ### Format files
 
 ```bash
-vr fmt
+deno task fmt
 ```
 
 ### Lint files
 
 ```bash
-vr lint
+deno task lint
 ```
 
 ### Run tests
 
 ```bash
-vr test
+deno task test
 ```
 
 ## Related pages
