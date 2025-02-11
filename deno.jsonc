@@ -8,7 +8,7 @@
   "tasks": {
     "run": "deno run --allow-net=0.0.0.0:8000 --allow-read=. --watch server.ts",
 
-    "test": "deno test --reload --allow-read=. --allow-none",
+    "test": "deno test --reload --allow-read=.",
     "cov": "deno task test --coverage=cov_profile; deno coverage cov_profile",
     "lint": "deno lint --ignore=cov_profile",
     "fmt": "deno fmt --ignore=cov_profile",
