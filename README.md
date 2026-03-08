@@ -62,6 +62,19 @@ the colors.
 
 The text that you want to show. It need to be less than 70 characters.
 
+### scheme
+
+- type: `string`
+- default: (none)
+
+A predefined color scheme name. Available schemes: `github`, `halloween`,
+`amber`, `blue`, `green`, `red`, `pink`, `purple`, `indigo`, `teal`, `cyan`,
+`orange`, `brown`, `grey`, `unicorn`, `summer`, `sunset`, `moon`, `psychedelic`,
+`gameboy`, `dark`.
+
+When set, it overrides the default colors for `bg`, `frame`, and `l0`-`l4`.
+Individual color parameters can still override specific colors from the scheme.
+
 ### l0, l1, l2, l3, l4
 
 - type: `string`
@@ -115,30 +128,10 @@ All contributions are welcome!
 
 ## Develop
 
-See defined tasks to run `deno task`.
-
-### Local run
-
 ```bash
-deno task run
-```
-
-### Format files
-
-```bash
-deno task fmt
-```
-
-### Lint files
-
-```bash
-deno task lint
-```
-
-### Run tests
-
-```bash
-deno task test
+deno task run   # Start local server
+deno task test  # Run tests
+deno task ci    # Lint, format check, and test
 ```
 
 ## Related pages
