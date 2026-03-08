@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertStringIncludes } from "@std/assert";
 import { Svg } from "./svg.ts";
 
 Deno.test("error", async () => {
@@ -40,4 +40,15 @@ Deno.test("success", async () => {
     ),
     resultSvg.trim().replace(levels, "level"),
   );
+});
+
+Deno.test("scroll", () => {
+  // text long enough to exceed 53 columns (weeks) and trigger scrolling
+  const text = "This is a long scrolling text! ";
+  const svg = Svg.render({ text });
+
+  assertStringIncludes(svg, "animation:step");
+  assertStringIncludes(svg, "@keyframes step");
+  assertStringIncludes(svg, "translateX(");
+  assertStringIncludes(svg, 'id="text-pixels"');
 });
