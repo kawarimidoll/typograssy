@@ -1,6 +1,0 @@
-{
-  "redirects": [
-    { "source": "/api", "destination": "https://typograssy.deno.dev/api" },
-    { "source": "/", "destination": "https://typograssy.deno.dev" }
-  ]
-}
