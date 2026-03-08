@@ -3,7 +3,7 @@
 </h1>
 
 [![ci](https://github.com/kawarimidoll/typograssy/workflows/ci/badge.svg)](.github/workflows/ci.yml)
-[![deno.land](https://img.shields.io/badge/deno-%5E1.14.0-green?logo=deno)](https://deno.land)
+[![Deno](https://img.shields.io/badge/deno-%5E2.0-green?logo=deno)](https://deno.com)
 [![LICENSE](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
 Generate SVG image like GitHub contribution graph (github-grass) with API.
@@ -143,7 +143,7 @@ deno task test
 
 ## Related pages
 
-- Runtime: [Deno](https://deno.land/), [Deno Deploy](https://deno.com/deploy)
+- Runtime: [Deno](https://deno.com/), [Deno Deploy](https://deno.com/deploy)
 - Font: [美咲フォント](https://littlelimit.net/misaki.htm)
 - Style of GUI page: [Water.css](https://github.com/kognise/water.css)
 - Inspired:
