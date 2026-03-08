@@ -1,3 +1,4 @@
+import { COLOR_SCHEME_NAMES, getColorScheme } from "./color_schemes.ts";
 import { CustomURLSearchParams } from "./custom_url_search_params.ts";
 import { Svg } from "./svg.ts";
 import { W3C_COLOR_NAMES } from "./w3c_color_names.ts";
@@ -11,6 +12,9 @@ export const errorMessages = {
   tooLongText:
     `'text' parameter is too long. Fix it less than ${MAX_STRING_LENGTH} characters.`,
   invalidColor: "invalid color is detected.",
+  invalidScheme: `invalid 'scheme' parameter. Available: ${
+    COLOR_SCHEME_NAMES.join(", ")
+  }`,
   tooLongComment:
     `'comment' parameter is too long. Fix it less than ${MAX_STRING_LENGTH} characters.`,
 };
@@ -50,17 +54,18 @@ export function apiHandler(searchParams: URLSearchParams): Response {
     return errorRes(errorMessages.tooLongText);
   }
 
-  const colorParams = [
-    ["bg", "ffffff"],
-    ["frame", "000000"],
-    ["l0", "ebedf0"],
-    ["l1", "9be9a8"],
-    ["l2", "40c463"],
-    ["l3", "30a14e"],
-    ["l4", "216e39"],
-  ].map(([key, defaultValue]) =>
-    getValidColor(params.getString(key, defaultValue))
-  );
+  const schemeName = params.getString("scheme");
+  const scheme = schemeName ? getColorScheme(schemeName) : null;
+  if (schemeName && !scheme) {
+    return errorRes(errorMessages.invalidScheme);
+  }
+
+  const defaults = scheme ?? getColorScheme("github")!;
+  const colorKeys = ["bg", "frame", "l0", "l1", "l2", "l3", "l4"] as const;
+  const colorParams = colorKeys.map((key, i) => {
+    const param = params.get(key);
+    return param ? getValidColor(param) : defaults[i];
+  });
 
   if (colorParams.some((item) => item === null)) {
     return errorRes(errorMessages.invalidColor);

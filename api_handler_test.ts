@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertStringIncludes } from "@std/assert";
 import {
   apiHandler,
   apiHeaders,
@@ -107,6 +107,38 @@ Deno.test("[apiHandler] success", async () => {
     svg.replace(levels, "level"),
     successSvg.trim().replace(levels, "level"),
   );
+});
+
+Deno.test("[apiHandler] error: invalid scheme", async () => {
+  const response = apiHandler(
+    new URLSearchParams({ text: "a", scheme: "nonexistent" }),
+  );
+  const svg = await response.text();
+  assertEquals(response.status, 400);
+  assertEquals(
+    svg,
+    loadErrorSvg(errorMessages.invalidScheme),
+  );
+});
+
+Deno.test("[apiHandler] success with scheme", async () => {
+  const response = apiHandler(
+    new URLSearchParams({ text: "a", scheme: "halloween" }),
+  );
+  const svg = await response.text();
+  assertEquals(response.status, 200);
+  // halloween l1 color
+  assertStringIncludes(svg, "#ffee4a");
+});
+
+Deno.test("[apiHandler] scheme with individual color override", async () => {
+  const response = apiHandler(
+    new URLSearchParams({ text: "a", scheme: "halloween", l1: "ff0000" }),
+  );
+  const svg = await response.text();
+  assertEquals(response.status, 200);
+  // overridden color should be used instead of halloween's l1
+  assertStringIncludes(svg, "#ff0000");
 });
 
 Deno.test("[getValidColor] check colors", () => {
