@@ -1,21 +1,13 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@hugoalh/range-iterator@^2.0.3": "2.1.1",
     "jsr:@kawarimidoll/markup-tag@1": "1.0.1",
-    "jsr:@ns/random@~0.1.1": "0.1.1",
     "jsr:@std/assert@1": "1.0.19",
     "jsr:@std/internal@^1.0.12": "1.0.12"
   },
   "jsr": {
-    "@hugoalh/range-iterator@2.1.1": {
-      "integrity": "59796ef5135cd95c54bde21e2949b4615f1af152f366c59f965a090c8cf1b539"
-    },
     "@kawarimidoll/markup-tag@1.0.1": {
       "integrity": "9dfda755e10b52629134e11541b3484f835c1df45679872babdeb854bada0b7d"
-    },
-    "@ns/random@0.1.1": {
-      "integrity": "e1af978385cd6e4417882d642c0e7157b7d355eed9e4f986e350a5126d39a8f5"
     },
     "@std/assert@1.0.19": {
       "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
@@ -29,9 +21,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@hugoalh/range-iterator@^2.0.3",
       "jsr:@kawarimidoll/markup-tag@1",
-      "jsr:@ns/random@~0.1.1",
       "jsr:@std/assert@1"
     ]
   }

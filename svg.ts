@@ -1,11 +1,14 @@
 import { getPixelPositions } from "./get_pixel_positions.ts";
-import { rangeIterator } from "@hugoalh/range-iterator";
-import { randInt } from "@ns/random";
 import { tag as h } from "@kawarimidoll/markup-tag";
 
 // create an integer array from 0 to num - 1
 function range(num: number): number[] {
-  return Array.from(rangeIterator(0, num - 1));
+  return Array.from({ length: num }, (_, i) => i);
+}
+
+// return a random integer in [min, max]
+function randInt(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const svgID = "typograssy";
