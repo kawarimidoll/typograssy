@@ -2,16 +2,19 @@
   "imports": {
     "@hugoalh/range-iterator": "jsr:@hugoalh/range-iterator@^2.0.3",
     "@ns/random": "jsr:@ns/random@^0.1.1",
-    "@std/assert": "jsr:@std/assert@^0.225.3",
-    "markup_tag": "https://deno.land/x/markup_tag@0.4.0/mod.ts"
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "@kawarimidoll/markup-tag": "jsr:@kawarimidoll/markup-tag@^1.0.0"
   },
+  "exclude": ["cov_profile", "z-ai"],
   "tasks": {
     "run": "deno run --allow-net=0.0.0.0:8000 --allow-read=. --watch server.ts",
-
     "test": "deno test --reload --allow-read=.",
     "cov": "deno task test --coverage=cov_profile; deno coverage cov_profile",
-    "lint": "deno lint --ignore=cov_profile",
-    "fmt": "deno fmt --ignore=cov_profile",
+    "lint": "deno lint",
+    "fmt": "deno fmt",
     "ci": "deno task lint && deno task fmt --check && deno task test"
+  },
+  "fmt": {
+    "exclude": ["resources", "*.svg", "*.html"]
   }
 }

@@ -1,7 +1,7 @@
 import { getPixelPositions } from "./get_pixel_positions.ts";
 import { rangeIterator } from "@hugoalh/range-iterator";
 import { randInt } from "@ns/random";
-import { tag as h } from "markup_tag";
+import { tag as h } from "@kawarimidoll/markup-tag";
 
 // create an integer array from 0 to num - 1
 function range(num: number): number[] {

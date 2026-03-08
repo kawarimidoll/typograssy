@@ -18,8 +18,8 @@ Deno.test("[apiHandler] error: no text parameter", async () => {
   const headers = response.headers;
   const svg = await response.text();
   assertEquals(
-    headers.entries(),
-    apiHeaders.entries(),
+    [...headers.entries()],
+    [...apiHeaders.entries()],
   );
   assertEquals(
     svg,
@@ -35,8 +35,8 @@ Deno.test("[apiHandler] error: too long text parameter", async () => {
   const headers = response.headers;
   const svg = await response.text();
   assertEquals(
-    headers.entries(),
-    apiHeaders.entries(),
+    [...headers.entries()],
+    [...apiHeaders.entries()],
   );
   assertEquals(
     svg,
@@ -53,8 +53,8 @@ Deno.test("[apiHandler] error: too long comment parameter", async () => {
   const headers = response.headers;
   const svg = await response.text();
   assertEquals(
-    headers.entries(),
-    apiHeaders.entries(),
+    [...headers.entries()],
+    [...apiHeaders.entries()],
   );
   assertEquals(
     svg,
@@ -67,8 +67,8 @@ Deno.test("[apiHandler] error: invalid color", async () => {
   const headers = response.headers;
   const svg = await response.text();
   assertEquals(
-    headers.entries(),
-    apiHeaders.entries(),
+    [...headers.entries()],
+    [...apiHeaders.entries()],
   );
   assertEquals(
     svg,
@@ -100,8 +100,8 @@ Deno.test("[apiHandler] success", async () => {
   const headers = response.headers;
   const svg = await response.text();
   assertEquals(
-    headers.entries(),
-    apiHeaders.entries(),
+    [...headers.entries()],
+    [...apiHeaders.entries()],
   );
   assertEquals(
     svg.replace(levels, "level"),
