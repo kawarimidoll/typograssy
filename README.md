@@ -38,7 +38,7 @@ See [parameters](#parameters) section.
 
 ### :scroll: Auto-scrolling
 
-![scroll](https://typograssy.deno.dev/api?text=Hello%20developer!%20)
+![scroll](https://typograssy.deno.dev/api?text=Hello%20developer!%20&v=2)
 
 The pixels will scroll if the text can't be show at once.
 
