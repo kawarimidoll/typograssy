@@ -78,11 +78,18 @@ export function apiHandler(searchParams: URLSearchParams): Response {
   if (comment.length > MAX_STRING_LENGTH) {
     return errorRes(errorMessages.tooLongComment);
   }
+  const commentColorParam = params.get("comment-color");
+  const commentColor = commentColorParam
+    ? getValidColor(commentColorParam)
+    : "#000000";
+  if (commentColor === null) {
+    return errorRes(errorMessages.invalidColor);
+  }
 
   const [bg, frame, ...colors] = colorParams as string[];
 
   return new Response(
-    Svg.render({ text, colors, bg, frame, speed, comment }),
+    Svg.render({ text, colors, bg, frame, speed, comment, commentColor }),
     {
       status: 200,
       headers: apiHeaders,

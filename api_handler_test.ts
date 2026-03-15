@@ -141,6 +141,24 @@ Deno.test("[apiHandler] scheme with individual color override", async () => {
   assertStringIncludes(svg, "#ff0000");
 });
 
+Deno.test("[apiHandler] success with comment-color", async () => {
+  const response = apiHandler(
+    new URLSearchParams({ text: "a", "comment-color": "ff0000" }),
+  );
+  const svg = await response.text();
+  assertEquals(response.status, 200);
+  assertStringIncludes(svg, 'fill="#ff0000"');
+});
+
+Deno.test("[apiHandler] error: invalid comment-color", async () => {
+  const response = apiHandler(
+    new URLSearchParams({ text: "a", "comment-color": "invalid" }),
+  );
+  const svg = await response.text();
+  assertEquals(response.status, 400);
+  assertEquals(svg, loadErrorSvg(errorMessages.invalidColor));
+});
+
 Deno.test("[getValidColor] check colors", () => {
   assertEquals(
     getValidColor("abc123"),
