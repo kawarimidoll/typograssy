@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="header" src="https://typograssy.deno.dev/api?text=Typograssy&frame=none&comment=">
+  <img alt="header" src="https://typograssy.kawarimidoll.deno.net/api?text=Typograssy&frame=none&comment=">
 </h1>
 
 [![ci](https://github.com/kawarimidoll/typograssy/workflows/ci/badge.svg)](.github/workflows/ci.yml)
@@ -8,15 +8,16 @@
 
 Generate an SVG image like GitHub contribution graph (github-grass) with API.
 
-You can configure the URL in [the online editor](https://typograssy.deno.dev/)
-with a live preview.
+You can configure the URL in
+[the online editor](https://typograssy.kawarimidoll.deno.net/) with a live
+preview.
 
 ## Quick start
 
 Markdown:
 
 ```md
-[![typograssy](https://typograssy.deno.dev/api?text=Hello%20world!)](https://github.com/kawarimidoll/typograssy)
+[![typograssy](https://typograssy.kawarimidoll.deno.net/api?text=Hello%20world!)](https://github.com/kawarimidoll/typograssy)
 ```
 
 HTML:
@@ -24,7 +25,7 @@ HTML:
 ```html
 <a href="https://github.com/kawarimidoll/typograssy"><img
     alt="typograssy"
-    src="https://typograssy.deno.dev/api?text=Hello%20world!"
+    src="https://typograssy.kawarimidoll.deno.net/api?text=Hello%20world!"
   ></a>
 ```
 
@@ -32,13 +33,13 @@ HTML:
 
 ### :gear: Configurable
 
-![color](https://typograssy.deno.dev/api?text=Hello%20world!&l1=9ba8e9&l2=6d74d9&l3=5057b9&l4=21226e)
+![color](https://typograssy.kawarimidoll.deno.net/api?text=Hello%20world!&l1=9ba8e9&l2=6d74d9&l3=5057b9&l4=21226e)
 
 See [parameters](#parameters) section.
 
 ### :scroll: Auto-scrolling
 
-![scroll](https://typograssy.deno.dev/api?text=Hello%20developer!%20&v=2)
+![scroll](https://typograssy.kawarimidoll.deno.net/api?text=Hello%20developer!%20&v=2)
 
 The pixels will scroll if the text can't be shown at once.
 
@@ -47,7 +48,7 @@ and the first one.
 
 ## :jp: Japanese support
 
-![japanese](https://typograssy.deno.dev/api?text=東京スカイツリーの高さは６３４ｍです。)
+![japanese](https://typograssy.kawarimidoll.deno.net/api?text=東京スカイツリーの高さは６３４ｍです。)
 
 You can check supported characters on [characters.ts](characters.ts).
 
